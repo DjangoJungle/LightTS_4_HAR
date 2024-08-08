@@ -1,0 +1,27 @@
+# test/test_mhnn_model.py
+import torch
+from models.mhnn import MHNN, MultilevelSignalsExtractor, HeterogeneousFeatureLearner, CrossAggregationModule
+
+# Set device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Test Multilevel Signals Extractor
+extractor = MultilevelSignalsExtractor().to(device)
+sample_input = torch.randn(64, 9, 128).to(device)  # Ensure input tensor is on the same device
+extracted_features = extractor(sample_input)
+print(f"Extracted features shape: {extracted_features.shape}")
+
+# Test Heterogeneous Feature Learner
+learner = HeterogeneousFeatureLearner().to(device)
+learner_output = learner(extracted_features)
+print(f"Output from Heterogeneous Feature Learner: {learner_output}")
+
+# Test Cross Aggregation Module
+aggregator = CrossAggregationModule().to(device)
+aggregated_output = aggregator(*learner_output)
+print(f"Aggregated output shape: {aggregated_output.shape}")
+
+# Test full MHNN Model
+model = MHNN(num_classes=6).to(device)
+outputs = model(sample_input)
+print(f"Model output shape: {outputs.shape}")  # Should print something like (batch_size, num_classes)
