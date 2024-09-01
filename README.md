@@ -1,1 +1,1 @@
-This is a basic repository for SRTP @ZJU.
+This is a basic repository for LightMHNN.
