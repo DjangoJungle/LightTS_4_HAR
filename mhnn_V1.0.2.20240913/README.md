@@ -15,4 +15,4 @@
    python experiments/train_mhnn.py
 3. Test the model using:
    ```bash
-   python test/test_mhnn.py
+   python test/data_analysis.py
