@@ -1,8 +1,0 @@
-from utils.data_loader import load_data
-
-if __name__ == '__main__':
-    train_loader, test_loader = load_data('../data/UCI-HAR-Dataset')
-
-    for inputs, labels in train_loader:
-        print(f'Inputs shape: {inputs.shape}, Labels shape: {labels.shape}')
-        break
